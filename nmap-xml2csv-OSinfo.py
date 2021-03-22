@@ -11,7 +11,7 @@ __description__ = """Parses the XML output from an nmap scan. The user
                   a csv file. Will append to a csv if the filename
                   already exists.
                   """
-#modificaitons to parse nmap XML fields related to enumerated OS information. ^thx!!
+#^modificaitons to parse nmap XML fields related to enumerated OS information. ^thx!!
 
 #Examples
 #
@@ -376,9 +376,7 @@ if __name__ == '__main__':
         print("\n[-] Please specify an input file to parse. "
               "Use -f <nmap_scan.xml> to specify the file\n")
         exit()
-    if not args.ip_addresses and not args.csv and not args.print_all \
-                and not args.print_web_ports and not args.least_common_ports \
-                and not args.most_common_ports and not args.filter_by_port:
+    if not args.ip_addresses and not args.csv and not args.print_all:
         parser.print_help()
         print("\n[-] Please choose an output option. Use -csv, -ip, or -p\n")
         exit()
