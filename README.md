@@ -9,9 +9,12 @@ Fields of interested parsed into following:
 #Examples
 
 Parse and print to screen only:
+
 python ./nmap-xml2csv-OSinfo.py -f nmap-output.xml -p
 
 Parse and save result to CSV:
+
 python ./nmap-xml2csv-OSinfo.py -f nmap-output.xml -csv parsed-OS-info.csv
+
 
 
