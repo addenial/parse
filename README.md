@@ -9,12 +9,21 @@ Fields of interested parsed into following:
 #Examples
 
 Parse and print to screen only:
-
-python ./nmap-xml2csv-OSinfo.py -f nmap-output.xml -p
+>python ./nmap-xml2csv-OSinfo.py -f nmap-output.xml -p
 
 Parse and save result to CSV:
+>python ./nmap-xml2csv-OSinfo.py -f nmap-output.xml -csv parsed-OS-info.csv
 
-python ./nmap-xml2csv-OSinfo.py -f nmap-output.xml -csv parsed-OS-info.csv
+# nmap-xml2csv-services.py
 
+`IP,port,proto,service,product,version,extra info,os type,hostname`
+
+#Examples
+
+Parse and print to screen only:
+>python ./nmap-xml2csv-services.py -f nmap-sv.xml -p
+
+Parse and save result to CSV:
+>python ./nmap-xml2csv-services.py -f nmap-sv.xml -csv services.csv
 
 
