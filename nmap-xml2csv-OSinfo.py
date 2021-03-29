@@ -77,7 +77,8 @@ def get_host_data(root):
             os_match_name = os_element[0].findall('osmatch')[0].attrib['name']
             os_accuracy = os_element[0].findall('osmatch')[0].attrib['accuracy']
 
-        except IndexError:
+        except (IndexError,KeyError):    
+        #except IndexError:
             #os_name = ''
 
             os_family = ''
