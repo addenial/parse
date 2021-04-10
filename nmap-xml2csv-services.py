@@ -3,7 +3,7 @@
 
 # Credit where credit is due...
 __author__ = 'Jake Miller (@LaconicWolf)'
-__date__ = '20171220xx~'
+__date__ = '20171220xx~~~~~~'
 __version__ = '0.01Xxxxx'
 __description__ = """Parses the XML output from an nmap scan. The user
                   can specify whether the data should be printed,
@@ -21,6 +21,29 @@ __description__ = """Parses the XML output from an nmap scan. The user
 #Parse and save result to CSV:
 #python ./nmap-xml2csv-services.py -f nmap-sv.xml -csv services.csv
 #
+
+
+#
+#Parsing multiple files at once, print to screen  
+#python .\nmap-xml2csv-services.py -f nmaps-sv.xml nmap-sv2.xml nmap-sv3.xml -p
+#
+#Parse every .xml file in current directory, print to screen
+#python3 ./nmap-xml2csv-services.py -f '*' -p
+#python ./nmap-xml2csv-services.py -f * -p
+#
+#
+#Parse every .xml file in current directory and save results to CSV 
+#python3 ./nmap-xml2csv-services.py -f '*' -csv services.csv
+#python ./nmap-xml2csv-services.py -f * -csv services.csv
+#
+
+
+#remove duplicates example linux...
+# cat services.csv | sort -r | uniq 
+
+#windows
+# type services.csv | sort /r /unique
+
 
 import xml.etree.ElementTree as etree
 import os
@@ -230,6 +253,11 @@ def list_ip_addresses(data):
     addr_list = [ip for ip in sorted_set]
     return addr_list
 
+#def PermissionError(e):
+#    print(e)
+#    return e
+
+
 def print_web_ports(data):
     """Examines the port information and prints out the IP and port
     info in URL format (https://ipaddr:port/).
@@ -308,8 +336,56 @@ def main():
     """Main function of the script."""
     for filename in args.filename:
 
-        # Checks the file path
-        if not os.path.exists(filename):
+
+        #insert code here... if filename is *, then parse every .xml in working directory 
+        #print(filename)
+        if(filename == '*' ):
+            #print("yooooooooooooooooooooo")
+            
+            path = '.'
+            cwd = os.getcwd()
+            #print("Current working directory: {0}".format(cwd))
+            
+            for filenameeach in os.listdir(cwd):
+                if not filenameeach.endswith('.xml'): continue
+                fullname = os.path.join(path, filenameeach)
+                #print(filenameeach)
+                #print(fullname)
+            
+                #choosing fillenameeach - parse each of those.     
+                
+                #print the below message only if -csv is specified. 
+                # if -p then suppress and only print to screen. same with -ip  
+                #print('\n[+] Parsing .xml file {} \n'.format(
+                #filenameeach))
+                #print(filenameeach)
+                
+                #data = parse_xml(filename)
+                data = parse_xml(filenameeach)
+                
+                #print("hi")
+                
+                if args.csv:
+                    parse_to_csv(data)
+                if args.ip_addresses:
+                    addrs = list_ip_addresses(data)
+                    for addr in addrs:
+                        print(addr)
+                if args.print_all:
+                    print_data(data)
+                #print_data(data)
+                
+                    #if args.print_all:
+                     #   print_data(data)
+
+            continue
+            
+
+        
+        # Checks the file path - if not using wildcard then individual file-
+        #if not os.path.exists(filename):
+        elif not os.path.exists(filename):
+
             parser.print_help()
             print("\n[-] The file {} cannot be found or you do not have "
                   "permission to open the file.".format(filename))
