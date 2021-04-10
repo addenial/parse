@@ -4,7 +4,7 @@
 # Credit where credit is due...
 __author__ = 'Jake Miller (@LaconicWolf)'
 __date__ = '20171220'
-__version__ = '0.01Xxxxx'
+__version__ = '0.01Xxxxx~~~~~~----'
 __description__ = """Parses the XML output from an nmap scan. The user
                   can specify whether the data should be printed,
                   displayed as a list of IP addresses, or output to
@@ -288,8 +288,55 @@ def main():
     """Main function of the script."""
     for filename in args.filename:
 
-        # Checks the file path
-        if not os.path.exists(filename):
+
+        #insert code here... if filename is *, then parse every .xml in working directory 
+        #print(filename)
+        if(filename == '*' ):
+            #print("yooooooooooooooooooooo")
+
+            path = '.'
+            cwd = os.getcwd()
+            #print("Current working directory: {0}".format(cwd))
+
+            for filenameeach in os.listdir(cwd):
+                if not filenameeach.endswith('.xml'): continue
+                fullname = os.path.join(path, filenameeach)
+                #print(filenameeach)
+                #print(fullname)
+
+                #choosing fillenameeach - parse each of those.     
+
+                #print the below message only if -csv is specified. 
+                # if -p then suppress and only print to screen. same with -ip  
+                #print('\n[+] Parsing .xml file {} \n'.format(
+                #filenameeach))
+                #print(filenameeach)
+
+                #data = parse_xml(filename)
+                data = parse_xml(filenameeach)
+
+                #print("hi")
+
+                if args.csv:
+                    parse_to_csv(data)
+                if args.ip_addresses:
+                    addrs = list_ip_addresses(data)
+                    for addr in addrs:
+                        print(addr)
+                if args.print_all:
+                    print_data(data)
+                #print_data(data)
+
+                    #if args.print_all:
+                     #   print_data(data)
+
+            continue
+
+
+
+        # Checks the file path - if not using wildcard then individual file-
+        #if not os.path.exists(filename):
+        elif not os.path.exists(filename):
             parser.print_help()
             print("\n[-] The file {} cannot be found or you do not have "
                   "permission to open the file.".format(filename))
