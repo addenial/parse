@@ -34,10 +34,20 @@ Parsing multiple files at once, print to screen
 
 Parse every .xml file in current directory, print to screen
 >python3 ./nmap-xml2csv-services.py -f '*' -p
+>
+>python ./nmap-xml2csv-services.py -f * -p
 
 Parse every .xml file in current directory and save results to CSV 
 >python3 ./nmap-xml2csv-services.py -f '*' -csv services.csv
+>
+>python ./nmap-xml2csv-services.py -f * -csv services.csv
 
+#.
+#remove duplicates example linux...
+>cat services.csv | sort -r | uniq 
+
+#windows
+>type services.csv | sort /r /unique
 
 
 # nmap-xml2csv-icmp.py
