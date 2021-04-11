@@ -81,8 +81,6 @@ Parse every .xml file in current directory, round to nearest /24, save results t
 
 >python ./nmap-xml2csv-icmp.py -f * -subs -csv active-subnets.csv
 
-#
-
 #to remove any remaining duplicates..
 
 #linux
@@ -90,6 +88,26 @@ Parse every .xml file in current directory, round to nearest /24, save results t
 
 #windows
 >type active-subnets.csv | sort /r /unique
+
+#
+# ports.py
+displays open ports from hosts. saves results to "f1____.log"
+
+`python ports.py -f * -p `
+
+
+linux - show sorted uniques, prep csv for other tooling example:
+
+`cat f1____.log | sort -n | uniq`
+
+`cat f1____.log | sort -n | uniq | tr '\r' ',' | tr --delete '\n'`
+
+
+windows - show uniques:
+
+`type f1____.log | sort /unique `
+
+
 
 #
 
