@@ -27,6 +27,26 @@ __description__ = """Parses the XML output from an nmap scan. The user
 #>python ./nmap-xml2csv-icmp.py -f nmap-pings.xml -subs -csv active-subnets.csv
 
 
+#Parse every .xml file in current directory, print to screen:
+#python3 ./nmap-xml2csv-icmp.py -f '*' -p
+#python ./nmap-xml2csv-icmp.py -f * -subs
+#
+#
+#Parse every .xml file in current directory, round to nearest /24, save results to CSV: 
+#python3 ./nmap-xml2csv-icmp.py -f '*' -subs -csv active-subnets.csv
+#python ./nmap-xml2csv-icmp.py -f * -subs -csv active-subnets.csv
+#
+
+
+
+
+#if still seeing duplicates....  
+#linux...
+# cat active-subnets.csv | sort -r | uniq 
+
+#windows
+# type active-subnets.csv | sort /r /unique
+
 
 import xml.etree.ElementTree as etree
 import os
@@ -238,6 +258,12 @@ def parse_to_csv(data):
     #if subnets only.. subnets
     #subs_data(data)
     if args.subnets:
+        #need to dupe-check if * for filename......
+    
+        #if(filename == '*' ):
+        #print("yo....")
+        
+        
         parzs = subs_data(data)
         
         #print (parzs)
@@ -245,7 +271,8 @@ def parse_to_csv(data):
             txt_file.write(gozz + "\n")
         
         #continue
-        exit()
+        
+        #exit()
     
     #if all ips to csv
     for item in data:
@@ -265,7 +292,11 @@ def parse_to_csv(data):
 
         
         #csv_writer.writerow(str([item]))
-        txt_file.write(item + "\n")
+        
+        if (args.subnets and args.csv):
+            continue
+        else:
+            txt_file.write(item + "\n")
         
         #print(item)
         
@@ -415,8 +446,58 @@ def main():
     """Main function of the script."""
     for filename in args.filename:
 
-        # Checks the file path
-        if not os.path.exists(filename):
+
+
+        #insert code here... if filename is *, then parse every .xml in working directory 
+        #print(filename)
+        if(filename == '*' ):
+            #print("yooooooooooooooooooooo")
+
+            path = '.'
+            cwd = os.getcwd()
+            #print("Current working directory: {0}".format(cwd))
+
+            for filenameeach in os.listdir(cwd):
+                if not filenameeach.endswith('.xml'): continue
+                fullname = os.path.join(path, filenameeach)
+                #print(filenameeach)
+                #print(fullname)
+
+                #choosing fillenameeach - parse each of those.     
+
+                #print the below message only if -csv is specified. 
+                # if -p then suppress and only print to screen. same with -ip  
+                #print('\n[+] Parsing .xml file {} \n'.format(
+                #filenameeach))
+                #print(filenameeach)
+
+                #data = parse_xml(filename)
+                data = parse_xml(filenameeach)
+
+                #print("hi")
+
+                if args.csv:
+                    parse_to_csv(data)
+                if args.ip_addresses:
+                    addrs = list_ip_addresses(data)
+                    for addr in addrs:
+                        print(addr)
+                if args.print_all:
+                    print_data(data)
+                #print_data(data)
+                if args.subnets:
+                    subs_data(data)
+
+                    #if args.print_all:
+                     #   print_data(data)
+
+            continue
+
+
+
+        # Checks the file path - if not using wildcard then individual file-
+        #if not os.path.exists(filename):
+        elif not os.path.exists(filename):
             parser.print_help()
             print("\n[-] The file {} cannot be found or you do not have "
                   "permission to open the file.".format(filename))
