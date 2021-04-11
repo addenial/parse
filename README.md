@@ -43,7 +43,8 @@ Parse every .xml file in current directory and save results to CSV
 >python ./nmap-xml2csv-services.py -f * -csv services.csv
 
 #.
-#remove duplicates example linux...
+#remove duplicates example 
+linux...
 >cat services.csv | sort -r | uniq 
 
 #windows
@@ -69,4 +70,27 @@ Parse and find active subnets, save to csv:
 >python ./nmap-xml2csv-icmp.py -f nmap-pings.xml -subs -csv active-subnets.csv
 
 
+Parse every .xml file in current directory, print to screen:
+>python3 ./nmap-xml2csv-icmp.py -f '*' -p
 
+>python ./nmap-xml2csv-icmp.py -f * -subs
+
+
+Parse every .xml file in current directory, round to nearest /24, save results to CSV: 
+>python3 ./nmap-xml2csv-icmp.py -f '*' -subs -csv active-subnets.csv
+
+>python ./nmap-xml2csv-icmp.py -f * -subs -csv active-subnets.csv
+
+#
+
+#to remove any remaining duplicates..
+
+#linux
+>cat active-subnets.csv | sort -r | uniq 
+
+#windows
+>type active-subnets.csv | sort /r /unique
+
+#
+
+#good luck!
