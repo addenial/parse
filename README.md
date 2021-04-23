@@ -102,6 +102,8 @@ linux - show sorted uniques, prep csv for other tooling example:
 
 `cat f1____.log | sort -n | uniq | tr '\r' ',' | tr --delete '\n'`
 
+`cat f1____.log | sort -n | uniq  | tr '\n' ',' `
+
 
 windows - show uniques:
 
