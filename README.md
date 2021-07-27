@@ -113,4 +113,22 @@ windows - show uniques:
 
 #
 
+
+
+# masscan_parse_full.py
+Parse masscan xml output into CSV 
+
+examples-
+
+single file parse:
+>python masscan_parse_full.py -f massPP.xml
+
+single file parse, display to screen, also save in CSV output file
+>python masscan_parse_full.py -f massPP.xml -o outt.csv
+
+parse every .xml masscan result file in current directory, display combined output
+>python masscan_parse_full.py -f '*'
+
+>python masscan_parse_full.py -f '*' -o outt.csv
+
 #good luck!
