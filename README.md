@@ -131,4 +131,22 @@ parse every .xml masscan result file in current directory, display combined outp
 
 >python masscan_parse_full.py -f '*' -o outt.csv
 
+
+
+
+# fixXML.py 
+
+`fixXML.py`
+
+checks if each .xml file in directory ends in "</nmaprun>". appends it if not, to allow xml parsingn of unfinished scans
+
+
+# uniqMeCSV.py 
+
+`python results.cvs `
+
+use to display only unique lines from CSV file 
+
+
+
 #good luck!
