@@ -138,7 +138,7 @@ parse every .xml masscan result file in current directory, display combined outp
 
 `fixXML.py`
 
-checks if each .xml file in directory ends in "</nmaprun>". appends it if not, to allow xml parsingn of unfinished scans
+checks if each .xml file in directory ends in \" \<\/nmaprun\> \". appends it if not, to allow xml parsingn of unfinished scans
 
 
 # uniqMeCSV.py 
