@@ -2,7 +2,7 @@
 
 
 # Credit where credit is due...
-__author__ = 'Jake Miller (@LaconicWolf)'
+__author__ = 'Jake Miller (@LaconicWolf) @add expand to grab all fields, wildcard support, etc '
 __date__ = '20171220'
 __version__ = '0.01Xxxxx'
 __description__ = """Parses the XML output from an nmap scan. The user
@@ -30,6 +30,7 @@ __description__ = """Parses the XML output from an nmap scan. The user
 #Parse every .xml file in current directory, print to screen:
 #python3 ./nmap-xml2csv-icmp.py -f '*' -p
 #python3 ./nmap-xml2csv-icmp.py -f '*' -subs
+#python3 ./nmap-xml2csv-icmp.py -f '*' -subs | sort | uniq
 #
 #
 #Parse every .xml file in current directory, round to nearest /24, save results to CSV: 
