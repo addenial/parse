@@ -29,7 +29,7 @@ __description__ = """Parses the XML output from an nmap scan. The user
 
 #Parse every .xml file in current directory, print to screen:
 #python3 ./nmap-xml2csv-icmp.py -f '*' -p
-#python ./nmap-xml2csv-icmp.py -f * -subs
+#python3 ./nmap-xml2csv-icmp.py -f '*' -subs
 #
 #
 #Parse every .xml file in current directory, round to nearest /24, save results to CSV: 
