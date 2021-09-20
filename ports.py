@@ -19,6 +19,11 @@ __description__ = """Parses the XML output from an nmap scan. The user
 #`python ports.py -f * -p `
 #
 #
+#     cat f1____.log | sort -n | uniq | tr '\n' ','
+#
+#
+#
+#
 #linux - show sorted uniques, prep csv for other tooling example:
 #
 #`cat f1____.log | sort -n | uniq`
